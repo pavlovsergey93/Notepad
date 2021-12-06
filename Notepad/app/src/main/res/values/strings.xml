@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Notepad</string>
+    <string name="note_1">Заметка №1</string>
+    <string name="note_2">Заметка №2</string>
+    <string name="note_3">Заметка №3</string>
+    <string name="note_4">Заметка №4</string>
+    <string name="note_5">Заметка №5</string>
+</resources>

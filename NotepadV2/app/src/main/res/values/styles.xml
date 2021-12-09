@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="btn_list" parent="Theme.MaterialComponents">
+        <item name="android:layout_width">@dimen/size_btn</item>
+        <item name="android:layout_height">@dimen/size_btn</item>
+        <item name="cornerRadius">@dimen/radius_btn</item>
+    </style>
+</resources>

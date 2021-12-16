@@ -50,6 +50,8 @@ public class CurrentTasksFragment extends Fragment implements CurrentTasksView {
 
     @Override
     public void showCurrentTasks(List<Note> notes) {
+
+
         // для каждого элемента списка -->
         for (Note note : notes) {
             // найти его View-шку

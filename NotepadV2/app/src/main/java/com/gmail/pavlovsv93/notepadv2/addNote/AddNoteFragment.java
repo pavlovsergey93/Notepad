@@ -20,13 +20,5 @@ public class AddNoteFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        Button btnSave = view.findViewById(R.id.btn_save_note);
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(requireContext(), "СОХРАНЕНО <<Не реализовано>>", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 }

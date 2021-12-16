@@ -20,4 +20,13 @@
     <string name="data_3">03.12.2021</string>
     <string name="data_4">04.12.2021</string>
     <string name="data_5">05.12.2021</string>
+    <string name="add_note">Добавить</string>
+    <string name="add_title_toolbar">Добавить заметку</string>
+    <string name="save_add">Сохранить</string>
+    <string name="close_add">Отмена</string>
+    <string name="nd_setting">Настройки</string>
+    <string name="nd_info">Информация</string>
+    <string name="name_notepad">Заметки</string>
+    <string name="text_info">Приложение разработано Павловым С.В.</string>
+    <string name="text_setting">Доработка на будущее</string>
 </resources>

@@ -1,39 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/add_note"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/add_note"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/edit_text_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Title name"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-/>
+        android:hint="Title name" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/edit_text"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:scrollbars="vertical"
         android:gravity="top"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edit_text_title"
-        app:layout_constraintBottom_toTopOf="@id/btn_save_note"
-        android:hint="Text note"/>
-    <com.google.android.material.button.MaterialButton
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btn_save_note"
-        android:text="@string/save"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:hint="Text note"
+        android:scrollbars="vertical" />
+</LinearLayout>

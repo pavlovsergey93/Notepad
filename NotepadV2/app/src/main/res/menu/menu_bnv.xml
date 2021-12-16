@@ -2,15 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/menu_add_note"
+        android:icon="@drawable/ic_baseline_control_point_24"
+        android:title="@string/add_note"
+        app:showAsAction="ifRoom"/>
+
+    <item
         android:id="@+id/menu_current_tasks"
-        android:enabled="true"
-        android:icon="@drawable/ic_baseline_library_add_24"
+        android:icon="@drawable/ic_baseline_list_alt_24"
         android:title="@string/str_current_tasks"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menu_completed_tasks"
-        android:enabled="true"
-        android:icon="@drawable/ic_baseline_library_add_check_24"
+        android:icon="@drawable/ic_baseline_playlist_add_check_24"
         android:title="@string/str_completed_tasks"
         app:showAsAction="ifRoom" />
 </menu>

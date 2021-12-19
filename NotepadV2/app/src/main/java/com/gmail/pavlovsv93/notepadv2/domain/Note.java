@@ -3,24 +3,39 @@ package com.gmail.pavlovsv93.notepadv2.domain;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.annotation.StringRes;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
+import java.util.Objects;
+
+@Entity
 public class Note implements Parcelable {
 
-    @StringRes
-    private int title;
+    @PrimaryKey(autoGenerate = true)
+    public int id;
 
-    @StringRes
-    private int text;
+    @ColumnInfo(name = "title")
+    public String title;
 
-    public Note(int title, int text) {
-        this.title = title;
-        this.text = text;
+    @ColumnInfo(name = "text")
+    public String text;
+
+    @ColumnInfo(name = "time")
+    public String timestemp;
+
+    @ColumnInfo(name = "done")
+    public boolean done;
+
+    public Note() {
     }
 
     protected Note(Parcel in) {
-        title = in.readInt();
-        text = in.readInt();
+        id = in.readInt();
+        title = in.readString();
+        text = in.readString();
+        timestemp = in.readString();
+        done = in.readByte() != 0;
     }
 
     public static final Creator<Note> CREATOR = new Creator<Note>() {
@@ -35,11 +50,11 @@ public class Note implements Parcelable {
         }
     };
 
-    public int getTitle() {
+    public String getTitle() {
         return title;
     }
 
-    public int getText() {
+    public String getText() {
         return text;
     }
 
@@ -50,7 +65,23 @@ public class Note implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(title);
-        dest.writeInt(text);
+        dest.writeInt(id);
+        dest.writeString(title);
+        dest.writeString(text);
+        dest.writeString(timestemp);
+        dest.writeByte((byte) (done ? 1 : 0));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Note note = (Note) o;
+        return id == note.id && done == note.done && Objects.equals(title, note.title) && Objects.equals(text, note.text) && Objects.equals(timestemp, note.timestemp);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, text, timestemp, done);
     }
 }

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.gmail.pavlovsv93.notepadv2" >
+    package="com.gmail.pavlovsv93.notepadv2">
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:name=".App"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.NotepadV2" >
+        android:theme="@style/Theme.NotepadV2">
         <activity
             android:name=".detail.NoteDetailsActivity"
             android:exported="false" />
@@ -17,7 +18,7 @@
             android:exported="false" />
         <activity
             android:name=".NotepadActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

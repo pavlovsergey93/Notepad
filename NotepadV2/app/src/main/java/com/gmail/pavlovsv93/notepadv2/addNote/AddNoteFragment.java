@@ -2,8 +2,6 @@ package com.gmail.pavlovsv93.notepadv2.addNote;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,7 +11,8 @@ import com.gmail.pavlovsv93.notepadv2.R;
 
 public class AddNoteFragment extends Fragment {
 
-    public AddNoteFragment(){
+
+    public AddNoteFragment() {
         super(R.layout.fragment_add_note);
     }
 
@@ -21,4 +20,5 @@ public class AddNoteFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
+
 }

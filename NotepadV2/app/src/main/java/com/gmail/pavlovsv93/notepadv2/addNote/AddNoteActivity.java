@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentManager;
 import com.gmail.pavlovsv93.notepadv2.App;
 import com.gmail.pavlovsv93.notepadv2.R;
 import com.gmail.pavlovsv93.notepadv2.domain.Note;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Date;
 import java.util.Locale;
@@ -40,8 +41,10 @@ public class AddNoteActivity extends AppCompatActivity {
                 //код для сохранения
                 EditText titleText = findViewById(R.id.edit_text_title);
                 EditText noteText = findViewById(R.id.edit_text);
-
-                if (titleText.getText() != null && noteText.getText() != null) {
+                if (titleText.getText().length() == 0) {
+                    Snackbar.make(v, R.string.save_add_exp, Snackbar.LENGTH_SHORT)
+                            .show();
+                } else if (titleText.getText().length() != 0) {
                     Note note = new Note();
                     note.title = titleText.getText().toString();
                     note.text = noteText.getText().toString();
@@ -49,8 +52,9 @@ public class AddNoteActivity extends AppCompatActivity {
                     note.timestemp = timeNow();
                     App.getInstance().getNotesDao().insert(note);
                     Toast.makeText(AddNoteActivity.this, "Сохранено", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
-                finish();
+
             }
         });
 
@@ -58,7 +62,21 @@ public class AddNoteActivity extends AppCompatActivity {
         findViewById(R.id.menu_tb_close).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                EditText editText = findViewById(R.id.edit_text);
+                EditText editTextTitle = findViewById(R.id.edit_text_title);
+
+                if (editTextTitle.getText().length() != 0 || editText.getText().length() != 0) {
+                    Snackbar.make(v, R.string.close_add_bar, Snackbar.LENGTH_INDEFINITE)
+                            .setAction(R.string.close_btn_text_bar, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    finish();
+                                }
+                            })
+                            .show();
+                } else {
+                    finish();
+                }
             }
         });
     }

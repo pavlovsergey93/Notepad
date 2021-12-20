@@ -96,7 +96,6 @@ public class NotepadActivity extends AppCompatActivity {
             }
         });
 
-
         DrawerLayout drawer = findViewById(R.id.drawer_layuot);
         Toolbar toolbar = findViewById(R.id.toolbar);
 

@@ -8,4 +8,8 @@ public interface CurrentTasksView {
 
     void showCurrentTasks(List<Note> notes);
 
+    void showProgress();
+
+    void hideProgress();
+
 }

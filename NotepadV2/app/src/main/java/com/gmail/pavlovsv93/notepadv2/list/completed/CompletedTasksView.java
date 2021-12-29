@@ -8,4 +8,8 @@ public interface CompletedTasksView {
 
     void showCompletedTasks(List<Note> notes);
 
+    void showProgress();
+
+    void hideProgress();
+
 }

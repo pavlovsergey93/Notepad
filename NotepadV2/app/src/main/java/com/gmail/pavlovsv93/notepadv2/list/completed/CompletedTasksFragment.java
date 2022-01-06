@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +33,8 @@ public class CompletedTasksFragment extends Fragment implements CompletedTasksVi
 
     private NotesPresenter presenter;
 
+    private ProgressBar pb;
+
     public CompletedTasksFragment() {
         super(R.layout.fragment_completed_tasks);
     }
@@ -47,6 +50,8 @@ public class CompletedTasksFragment extends Fragment implements CompletedTasksVi
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        pb = view.findViewById(R.id.progress);
+
         completedContainer = view.findViewById(R.id.completed_container);
 
         presenter.getListCompleted();
@@ -57,7 +62,7 @@ public class CompletedTasksFragment extends Fragment implements CompletedTasksVi
     public void showCompletedTasks(List<Note> notes) {
 
         for (Note note : notes) {
-            View itemView = LayoutInflater.from(requireContext()).inflate(R.layout.item_completed_task, completedContainer, false);
+            View itemView = LayoutInflater.from(getContext()).inflate(R.layout.item_completed_task, completedContainer, false);
 
             TextView textTitle = itemView.findViewById(R.id.text_title_comp);
             textTitle.setText(note.title);
@@ -92,10 +97,19 @@ public class CompletedTasksFragment extends Fragment implements CompletedTasksVi
                 }
             });
 
-
             completedContainer.addView(itemView);
         }
 
+    }
+
+    @Override
+    public void showProgress() {
+        pb.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgress() {
+        pb.setVisibility(View.GONE);
     }
 
     private void updateView() {

@@ -1,11 +1,11 @@
 package com.gmail.pavlovsv93.notepadv2.list;
 
+import com.gmail.pavlovsv93.notepadv2.domain.Callback;
 import com.gmail.pavlovsv93.notepadv2.domain.Note;
 import com.gmail.pavlovsv93.notepadv2.domain.NotesRepository;
 import com.gmail.pavlovsv93.notepadv2.list.completed.CompletedTasksView;
 import com.gmail.pavlovsv93.notepadv2.list.current.CurrentTasksView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class NotesPresenter {
@@ -20,9 +20,23 @@ public class NotesPresenter {
     }
 
     public void getListCurrent() {
-        List<Note> noteList = new ArrayList<>();
-        noteList = repository.getAllNotesCurr();
-        viewCurrent.showCurrentTasks(noteList);
+
+        viewCurrent.showProgress();
+
+        repository.getAllNotesCurr(new Callback<List<Note>>() {
+            @Override
+            public void onSucces(List<Note> result) {
+                viewCurrent.showCurrentTasks(result);
+                viewCurrent.hideProgress();
+            }
+
+            @Override
+            public void onError(Throwable error) {
+                viewCurrent.hideProgress();
+
+            }
+        });
+
 
     }
 
@@ -32,8 +46,21 @@ public class NotesPresenter {
     }
 
     public void getListCompleted(){
-        List<Note> noteList = new ArrayList<>();
-        noteList = repository.getAllNotesComp();
-        viewCompleted.showCompletedTasks(noteList);
+
+        viewCompleted.showProgress();
+
+        repository.getAllNotesComp(new Callback<List<Note>>() {
+            @Override
+            public void onSucces(List<Note> result) {
+                viewCompleted.showCompletedTasks(result);
+                viewCompleted.hideProgress();
+            }
+
+            @Override
+            public void onError(Throwable error) {
+                viewCompleted.hideProgress();
+            }
+        });
+
     }
 }

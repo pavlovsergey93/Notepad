@@ -4,8 +4,7 @@ import java.util.List;
 
 public interface NotesRepository {
 
-    List<Note> getAllNotesCurr();
+    void getAllNotesComp(Callback<List<Note>> callback);
 
-    List<Note> getAllNotesComp();
-
+    void getAllNotesCurr(Callback<List<Note>> callback);
 }

@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Notepad</string>
+    <string name="note_1">Заметка №1</string>
+    <string name="note_2">Заметка №2</string>
+    <string name="note_3">Заметка №3</string>
+    <string name="note_4">Заметка №4</string>
+    <string name="note_5">Заметка №5</string>
+    <string name="str_current_tasks">Текущие</string>
+    <string name="str_completed_tasks">Выполненные</string>
+    <string name="save">Сохранить</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="note_6">Заметка №6</string>
+    <string name="note_7">Заметка №7</string>
+    <string name="note_8">Заметка №8</string>
+    <string name="note_9">Заметка №9</string>
+    <string name="note_10">Заметка №10</string>
+    <string name="data_1">01.12.2021</string>
+    <string name="data_2">02.12.2021</string>
+    <string name="data_3">03.12.2021</string>
+    <string name="data_4">04.12.2021</string>
+    <string name="data_5">05.12.2021</string>
+    <string name="add_note">Добавить</string>
+    <string name="add_title_toolbar">Добавить заметку</string>
+    <string name="save_add">Сохранить</string>
+    <string name="close_add">Отмена</string>
+    <string name="nd_setting">Настройки</string>
+    <string name="nd_info">Информация</string>
+    <string name="name_notepad">Заметки</string>
+    <string name="text_info">Приложение разработано Павловым С.В.</string>
+    <string name="text_setting">Доработка на будущее</string>
+</resources>

@@ -1,5 +1,11 @@
 package com.gmail.pavlovsv93.notepadv2;
 
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,14 +14,6 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentResultListener;
-
-import android.content.Intent;
-import android.content.res.Configuration;
-import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 import com.gmail.pavlovsv93.notepadv2.addNote.AddNoteActivity;
 import com.gmail.pavlovsv93.notepadv2.detail.NoteDetailsActivity;
@@ -29,11 +27,21 @@ import com.google.android.material.navigation.NavigationView;
 
 public class NotepadActivity extends AppCompatActivity {
 
+    private Note selectNote;
+    public static final String ARG_NOTE_MAIN = "ARG_NOTE_MAIN";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notepad);
 
+        if (savedInstanceState != null && savedInstanceState.containsKey(ARG_NOTE_MAIN)) {
+            selectNote = savedInstanceState.getParcelable(ARG_NOTE_MAIN);
+
+            if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                showDetails();
+            }
+        }
         // создаем фрагметн менеджер
         FragmentManager fragmentManager = getSupportFragmentManager();
         // Выводим список задач
@@ -67,6 +75,24 @@ public class NotepadActivity extends AppCompatActivity {
                 fragmentManager.beginTransaction()
                         .replace(R.id.fragment_container, new CompletedTasksFragment())
                         .commit();
+            }
+        });
+
+        fragmentManager.setFragmentResultListener(CurrentTasksFragment.KEY_NOTE_LIST_CURRENT, this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                selectNote = result.getParcelable(CurrentTasksFragment.ARG_NOTE_LIST_CURRENT);
+
+                if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+
+                    showDetails();
+
+                } else {
+
+                    Intent intent = new Intent(NotepadActivity.this, NoteDetailsActivity.class);
+                    intent.putExtra(NoteDetailsActivity.EXTRA_DETAILS, selectNote);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -104,5 +130,19 @@ public class NotepadActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    private void showDetails() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container_two, NoteDetailsFragment.newInstance(selectNote))
+                .commit();
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (selectNote != null) {
+            outState.putParcelable(ARG_NOTE_MAIN, selectNote);
+        }
     }
 }

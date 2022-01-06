@@ -16,11 +16,11 @@ public class NoteDetailsFragment extends Fragment {
     public static final String ARG_DETAILS_NOTE = "ARG_DETAILS_NOTE";
 
     public static NoteDetailsFragment newInstance(Note note) {
-        NoteDetailsFragment ndf = new NoteDetailsFragment();
-        Bundle args = new Bundle();
-        args.putParcelable(ARG_DETAILS_NOTE, note);
-        ndf.setArguments(args);
-        return ndf;
+        NoteDetailsFragment ndFragment = new NoteDetailsFragment();
+        Bundle data = new Bundle();
+        data.putParcelable(ARG_DETAILS_NOTE, note);
+        ndFragment.setArguments(data);
+        return ndFragment;
     }
 
     public NoteDetailsFragment(){

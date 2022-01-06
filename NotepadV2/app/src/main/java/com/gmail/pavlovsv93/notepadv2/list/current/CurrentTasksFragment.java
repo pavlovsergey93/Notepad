@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.gmail.pavlovsv93.notepadv2.App;
 import com.gmail.pavlovsv93.notepadv2.R;
 import com.gmail.pavlovsv93.notepadv2.domain.InMemoryNotesRepository;
 import com.gmail.pavlovsv93.notepadv2.domain.Note;
@@ -26,8 +27,9 @@ public class CurrentTasksFragment extends Fragment implements CurrentTasksView {
     private NotesPresenter presenterCurrent;
 
     public static final String ARG_NOTE_LIST_CURRENT = "ARG_NOTE_LIST_CURRENT";
+    public static final String KEY_NOTE_LIST_CURRENT = "KEY_NOTE_LIST_CURRENT";
 
-    public CurrentTasksFragment(){
+    public CurrentTasksFragment() {
         super(R.layout.fragment_current_tasks);
     }
 
@@ -50,8 +52,6 @@ public class CurrentTasksFragment extends Fragment implements CurrentTasksView {
 
     @Override
     public void showCurrentTasks(List<Note> notes) {
-
-
         // для каждого элемента списка -->
         for (Note note : notes) {
             // найти его View-шку
@@ -60,21 +60,25 @@ public class CurrentTasksFragment extends Fragment implements CurrentTasksView {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(requireContext(), note.getTitle(), Toast.LENGTH_SHORT).show();
+                    Bundle data = new Bundle();
+                    data.putParcelable(ARG_NOTE_LIST_CURRENT, note);
+
+                    getParentFragmentManager()
+                            .setFragmentResult(KEY_NOTE_LIST_CURRENT, data);
+                    //                   Toast.makeText(requireContext(), note.getTitle(), Toast.LENGTH_SHORT).show();
                 }
             });
             // найти все view элементы на найденой View-ше
             TextView textTitle = itemView.findViewById(R.id.text_title);
-            textTitle.setText(note.getTitle());
+            textTitle.setText(note.title);
 
             TextView textDate = itemView.findViewById(R.id.text_date);
-            textDate.setText(note.getText());
+            textDate.setText(note.timestemp);
             // кнопка редактирования текста
             Button btnEdit = itemView.findViewById(R.id.btn_edit);
             btnEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(requireContext(), "Редактировать заметку", Toast.LENGTH_SHORT).show();
                 }
             });
             // кнопка перемещения задачи из текущего списка в выполненный
@@ -82,10 +86,19 @@ public class CurrentTasksFragment extends Fragment implements CurrentTasksView {
             btnDone.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    note.done = true;
+                    App.getInstance().getNotesDao().update(note);
+                    updateView();
                     Toast.makeText(requireContext(), "Заметка выполнена", Toast.LENGTH_SHORT).show();
                 }
             });
             currentContainer.addView(itemView);
         }
+    }
+
+    private void updateView() {
+        getParentFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, new CurrentTasksFragment())
+                .commit();
     }
 }
